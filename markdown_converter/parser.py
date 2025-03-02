@@ -29,22 +29,22 @@ def parse_markdown(md_text):
 
         # Bold
         if '**' in line or '__' in line:
-            parsed_text.append(('bold', line.strip('**').strip('__')))
+            parsed_text.append(('strong', line.strip('**').strip('__')))
         # Italic
         if '*' in line or '_' in line:
-            parsed_text.append(('italic', line.strip('*').strip('_')))
+            parsed_text.append(('em', line.strip('*').strip('_')))
 
         #Bold + Italic
         if '***' in line or '___' in line:
-            parsed_text.append(('bold_italic', line.strip('***').strip('___')))
+            parsed_text.append(('strong><em', line.strip('***').strip('___')))
 
         # Inline
         if '`' in line:
-            parsed_text.append(('inline', line.strip('`')))
+            parsed_text.append(('code', line.strip('`')))
 
         # Code Blocks
         if '```' in line:
-            parsed_text.append(('code_block', line.strip('```')))
+            parsed_text.append(('pre><code', line.strip('```')))
 
         # Blockquotes
         if '>' in line:
@@ -52,11 +52,11 @@ def parse_markdown(md_text):
 
         # Unordered Lists
         if '*' in line or '-' in line or '+' in line:
-            parsed_text.append(('unordered_list', line.strip('*').strip('-').strip('+')))
+            parsed_text.append(('ul', line.strip('*').strip('-').strip('+')))
 
         # Ordered LIsts
         if re.match(r'^\d.', line):
-            parsed_text.append(('ordered_list', line.strip('\d.')))
+            parsed_text.append(('ol', line.strip('\d.')))
 
         # Links
         if re.match(r'^[a-zA-Z0-9]', line):
@@ -64,15 +64,15 @@ def parse_markdown(md_text):
 
         # Images
         if re.match(r'!^[a-zA-Z0-9]', line):
-            parsed_text.append(('image', line))
+            parsed_text.append(('img', line.strip('!')))
 
         # Horizontal Rule
         if re.match(r'^---', line) or re.match(r'^___', line) or re.match(r'^***', line):
-            parsed_text.append(('horizontal_rule', line))
+            parsed_text.append(('hr', line))
 
         # Strikethrough
         if '~~' in line:
-            parsed_text.append(('strikethrough', line.strip('~~')))
+            parsed_text.append(('del', line.strip('~~')))
 
         # Table
         if '|' in line:
