@@ -1,5 +1,5 @@
-from markdown_converter import parse_markdown
-from markdown_converter import render_html
+from markdown_converter.parser import parse_markdown
+from markdown_converter.render import render_html
 
 def convert_markdown_to_html(file_path):
     """Reads a markdown file and returns its as an HTML file."""
