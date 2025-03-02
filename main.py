@@ -1,4 +1,4 @@
-from markdown_converter import parser_markdown
+from markdown_converter import parse_markdown
 from markdown_converter import render_html
 
 def convert_markdown_to_html(file_path):
