@@ -1,8 +1,14 @@
 import re
 
+# Advanced Considerations
+# 1. Inline vs Block Processing
+# 2. Nested Lists
+# 3. Raw HTML Blocks
+# 4. Error Handling 
+
 def parse_markdown(md_text):
     """Parse Markdown text and return a tuple."""
-    parsed_text = ()
+    parsed_text = []
 
     for line in md_text:
         # Check for headings 
@@ -75,3 +81,5 @@ def parse_markdown(md_text):
         # Escaping Characters
         if re.match(r'\'', line):
             parsed_text.append(('escape', line.strip('\'')))
+
+    return parsed_text
