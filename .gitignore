@@ -1,0 +1,16 @@
+# Byte-compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment (if you use venv)
+venv/
+.env/
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# Output files
+*.html
