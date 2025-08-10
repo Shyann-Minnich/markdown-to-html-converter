@@ -55,7 +55,7 @@ def parse_markdown(md_text):
             parsed_text.append(('ul', line.strip('*').strip('-').strip('+')))
 
         # Ordered LIsts
-        if re.match(r'^\d.', line):
+        if re.match(r'^\d+\.', line):
             parsed_text.append(('ol', line.strip('\d.')))
 
         # Links
@@ -67,7 +67,7 @@ def parse_markdown(md_text):
             parsed_text.append(('img', line.strip('!')))
 
         # Horizontal Rule
-        if re.match(r'^---', line) or re.match(r'^___', line) or re.match(r'^***', line):
+        if re.match(r'^---', line) or re.match(r'^___', line) or re.match(r'^\*\*\*', line):
             parsed_text.append(('hr', line))
 
         # Strikethrough
