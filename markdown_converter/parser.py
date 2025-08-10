@@ -59,7 +59,7 @@ def parse_markdown(md_text):
             parsed_text.append(('ol', line.strip('\d.')))
 
         # Links
-        if re.match(r'^[a-zA-Z0-9]', line):
+        if re.match(r'^\[.*\]\(.*\)$', line):
             parsed_text.append(('link', line))
 
         # Images

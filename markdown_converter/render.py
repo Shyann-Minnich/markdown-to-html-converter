@@ -9,9 +9,13 @@ def render_html(parsed_text):
 
     for tag, content in parsed_text:
         if(tag == "link"):
-            text = content.split("]")[0].strip("[")
-            link = content.split("(")[1].strip(")")
-            html_output += f"<a href='{link}'>{text}</a>"
+            # Error handling for malformed links
+            if "(" in content and "]" in content:
+                text = content.split("]")[0].strip("[")
+                link = content.split("(", 1)[1].strip(")")
+                html_output += f"<a href='{link}'>{text}</a>"
+            else:
+                html_output += content  # fallback for malformed links
         elif(tag == "img"):
             text = content.split("]")[0].strip("[")
             image = content.split("(")[1].strip(")")
