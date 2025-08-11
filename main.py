@@ -12,11 +12,22 @@ def convert_markdown_to_html(file_path):
     # Parse the markdown text
     parsed_text = parse_markdown(md_text)
     # Render the parsed text as HTML
-    html_output = render_html(parsed_text)
+    html_body = render_html(parsed_text)
+    full_html = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Converted Markdown</title>
+</head>
+<body>
+{html_body}
+</body>
+</html>
+"""
 
     # Write the HTML output to a file
     with open('output.html', 'w') as file:
-        file.write(html_output)
+        file.write(full_html)
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
