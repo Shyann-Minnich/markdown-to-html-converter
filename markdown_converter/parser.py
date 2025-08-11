@@ -26,13 +26,16 @@ def parse_markdown(md_text):
             continue
 
         # Table
-        if "|" in line and not re.match(r'^\s*\|?[- ]+\|?[- |]*$', line):
+        if "|" in line:
+            # Skip separator lines like |----|----|
+            if re.match(r'^\s*\|?[- ]+\|?[- |]*$', line):
+                continue
             if not in_table:
                 table_lines = []
                 in_table = True
             table_lines.append(line)
             continue
-        elif in_table and (not "|" in line or line.strip().startswith("|---")):
+        elif in_table:
             parsed_text.append(('table', table_lines))
             table_lines = []
             in_table = False
