@@ -63,11 +63,10 @@ def render_html(parsed_text):
         elif tag == "p":
             html_output += f"<p>{render_inline(content)}</p>"
         elif tag == "table":
-            # Simple table rendering
             html_output += "<table>\n"
             for i, row in enumerate(content):
                 cols = [c.strip() for c in row.strip().split('|')]
-                cols = [c for c in cols if c]  # Remove empty columns
+                cols = [c for c in cols if c]
                 if i == 0:
                     html_output += "<tr>" + "".join(f"<th>{render_inline(col)}</th>" for col in cols) + "</tr>\n"
                 else:
