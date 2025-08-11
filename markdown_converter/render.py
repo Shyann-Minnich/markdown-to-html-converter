@@ -2,23 +2,26 @@ import re
 import html 
 
 def render_inline(text):
-    """Converts Markdown inline elements in a string to their HTML equivalents."""
+    """
+    Converts Markdown inline elements in a string to their HTML equivalents.
+    Handles images, links, bold, italic, bold+italic, strikethrough, and inline code.
+    """
+    # Handle escaping: replace \* with *, \_ with _, etc.
+    text = re.sub(r'\\([\\`*_{}\[\]()#+\-.!|])', r'\1', text)
     # Images
     text = re.sub(r'!\[([^\]]+)\]\(([^\)]+)\)', r'<img src="\2" alt="\1">', text)
     # Links
     text = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'<a href="\2">\1</a>', text)
-    # Bold + Italic
-    text = re.sub(r'\*\*\*([^\*]+)\*\*\*', r'<strong><em>\1</em></strong>', text)
-    # Bold
-    text = re.sub(r'\*\*([^\*]+)\*\*', r'<strong>\1</strong>', text)
-    # Italic
-    text = re.sub(r'\*([^\*]+)\*', r'<em>\1</em>', text)
+    # Bold + Italic (*** or ___)
+    text = re.sub(r'(\*\*\*|___)(.+?)\1', r'<strong><em>\2</em></strong>', text)
+    # Bold (** or __)
+    text = re.sub(r'(\*\*|__)(.+?)\1', r'<strong>\2</strong>', text)
+    # Italic (* or _)
+    text = re.sub(r'(\*|_)(.+?)\1', r'<em>\2</em>', text)
     # Strikethrough
-    text = re.sub(r'~~([^~]+)~~', r'<del>\1</del>', text)
+    text = re.sub(r'~~(.+?)~~', r'<del>\1</del>', text)
     # Inline code
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
-    # Handle escaping: replace \* with *, \_ with _, etc.
-    text = re.sub(r'\\([\\`*_{}\[\]()#+\-.!|])', r'\1', text)
     return text
 
 def render_html(parsed_text):
