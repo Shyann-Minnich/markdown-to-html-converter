@@ -5,10 +5,11 @@ This Python script converts **Markdown (.md)** files to **HTML**. It parses the 
 ## Features
 - Converts basic Markdown elements (headers, lists, bold, italic, etc.) into HTML.
 - Supports both single-line and multi-line Markdown elements.
+- Handles tables, code blocks, blockquotes, and links.
 - Saves the converted HTML output to a file.
 
 ## Technologies Used
-- Python
+- Python 3.7+
 - Regular Expressions (for parsing Markdown)
 
 ## Setup and Installation
@@ -23,14 +24,24 @@ This Python script converts **Markdown (.md)** files to **HTML**. It parses the 
     cd markdown-to-html-converter
     ```
 
-3. Install any dependencies (if needed):
+3. (Optional) Create and activate a virtual environment:
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+4. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
 
 ## Usage
 
-To use the converter, simply run the script with the path to a Markdown file:
+To use the converter, run:
 
 ```bash
-python convert.py path_to_markdown_file.md
+python main.py path/to/yourfile.md
+```
+
+The converted HTML will be saved as `output.html` in the current directory.
+
